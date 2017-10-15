@@ -1,8 +1,11 @@
 package com.example.admin.firebaseedel.view;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +26,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.net.URI;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     private StorageReference mStorageRef;
+    private AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,4 +187,36 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
+
+    EditText adEditTextAmount;
+    EditText adEditTextDescription;
+    public void requestAdvance(View view) {
+        final AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+
+        View mView = getLayoutInflater().inflate(R.layout.advance_request_layout, null);
+
+        adEditTextAmount = mView.findViewById(R.id.adEditTextAmount);
+        adEditTextDescription = mView.findViewById(R.id.adEditTextDescription);
+
+        mBuilder.setView(mView);
+        dialog = mBuilder.create();
+        dialog.show();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void sendAdvance(View view) {
+        if(Objects.equals(adEditTextAmount.getText().toString(), "")
+                && Objects.equals(adEditTextDescription.getText().toString(), "")){
+            Toast.makeText(this, "Empty Fields", Toast.LENGTH_SHORT).show();
+        }else{
+            float requestedAmountAdvance = Float.valueOf(adEditTextAmount.getText().toString());
+            Toast.makeText(this, "Amount: " + adEditTextAmount.getText().toString(), Toast.LENGTH_SHORT).show();
+            String advanceDescription = adEditTextDescription.getText().toString();
+        }
+    }
+    public void cancelAlertDialog(View view) {
+        dialog.dismiss();
+    }
+
+
 }

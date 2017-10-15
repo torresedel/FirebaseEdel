@@ -48,4 +48,10 @@
         android:text="Select image from Gallery"
         android:onClick="sendPictureToStorage"/>
 
+    <Button
+        android:text="Request Advance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="requestAdvance"/>
+
 </LinearLayout>
