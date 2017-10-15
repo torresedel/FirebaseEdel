@@ -8,6 +8,7 @@
     android:paddingRight="10dp"
     android:paddingTop="15dp">
 
+
     <EditText
         android:id="@+id/adEditTextAmount"
         android:layout_width="match_parent"
